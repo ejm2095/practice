@@ -1,5 +1,6 @@
 __author__ = 'ejm2095'
 
+#Find the largest palindrome made from the product of two 3-digit numbers.
 from utils import largest
 def pal():
     v = []
