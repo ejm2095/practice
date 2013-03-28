@@ -1,4 +1,4 @@
-__author__ = 'undergroundskier'
+__author__ = 'ejm2095'
 
 def smallestM(lg):
     cnt = 1
