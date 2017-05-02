@@ -77,16 +77,15 @@ def placement(word):
     place = 0
     index = 0
     for letter in word_base:
-        letters_before = sorted_word_uniques.index(letter)
-        print 'letters_before: {} possibilities:{} word_base[index+1:]: {}'.format(letters_before, possibilities(word_base[index+1:]), word_base[index+1:])
-        place += letters_before*possibilities(word_base[index+1:])
-        index += 1
-        sorted_word = get_sorted_word(word_base[index:])
-        sorted_word_uniques = list(set(sorted_word))
-        sorted_word_uniques.sort()
-        print list(word_base[index:]), sorted_word
-        if list(word_base[index:]) == sorted_word and place > 0 and len(word_base[index:]) > 1:
-            return place + 1
+        if len(word_base[index+1:]):
+            letters_before = sorted_word_uniques.index(letter)
+            added_place= (letters_before*possibilities(word_base[index+1:]) | 1)
+            print 'letters_before: {} possibilities:{} word_base[index+1:]: {} added_place: {}'.format(letters_before, possibilities(word_base[index+1:]), word_base[index+1:], added_place)
+            place += added_place
+            index += 1
+            sorted_word = get_sorted_word(word_base[index:])
+            sorted_word_uniques = list(set(sorted_word))
+            sorted_word_uniques.sort()
     return place
 
 def get_sorted_word(word):
