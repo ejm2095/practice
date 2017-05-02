@@ -11,6 +11,8 @@ occur before.
 
 from math import factorial, ceil
 import itertools
+import operator
+import functools
 
 #step one find a solution that fits words with no repeat letters
 #works for words such as QUESTION and CABD
@@ -33,7 +35,7 @@ def placement_no_repeats(word):
 
     print "%s %d" % (word, rank)
 
-def placement(word):
+def placementWRONG(word):
     n = len(word) #get the length of the word
     branches = factorial(n)/repeats(word) #find the number of possibilities
     # First convert the word to a list
@@ -67,6 +69,39 @@ def placement(word):
 
     print "%s %d" % (word, rank)
 
+def placement(word):
+    word_base = word
+
+    sorted_word_uniques = list(set(word))
+    sorted_word_uniques.sort()
+    place = 0
+    index = 0
+    for letter in word_base:
+        letters_before = sorted_word_uniques.index(letter)
+        print 'letters_before: {} possibilities:{} word_base[index+1:]: {}'.format(letters_before, possibilities(word_base[index+1:]), word_base[index+1:])
+        place += letters_before*possibilities(word_base[index+1:])
+        index += 1
+        sorted_word = get_sorted_word(word_base[index:])
+        sorted_word_uniques = list(set(sorted_word))
+        sorted_word_uniques.sort()
+        print list(word_base[index:]), sorted_word
+        if list(word_base[index:]) == sorted_word and place > 0 and len(word_base[index:]) > 1:
+            return place + 1
+    return place
+
+def get_sorted_word(word):
+    list_word = list(word)
+    list_word.sort()
+    return list_word
+
+def possibilities(word):
+    total_letters = len(word)
+    repeated_letter = {}
+    for letter in word:
+        repeated_letter[letter] = repeated_letter.get(letter, 0) + 1
+    return factorial(total_letters)/ functools.reduce(operator.mul, [factorial(x) for x in repeated_letter.values()], 1)
+
+
 #simple function to count the number of repeats
 def repeats(word):
     awn = 1
@@ -92,4 +127,4 @@ while choice != "-1":
     print
     choice = raw_input("Enter a word to test or -1 to exit: ")
     if choice != "-1":
-        placement(choice)
+        print placement(choice)
