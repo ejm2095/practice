@@ -1,5 +1,5 @@
 mids = {}
-
+reduced_corp = []
 
 A = 'a'
 B = 'b'
@@ -260,17 +260,21 @@ def is_item_confident(item):
 
 
 def fuzzy_match_tail(item, center_matches):
-    return filter(lambda i: i[1:] == item[1:], center_matches)\
+    return filter(lambda i: i[:2] == item[:2], center_matches)\
 
 
 def fuzzy_match_head(item, center_matches):
     return filter(lambda i: i[1:] == item[1:], center_matches)
 
-# build dictionary based on center letter
-for item in corp:
-    append_item(item)
+
+def fuzzle_next(item, center_matches):
+    return filter(lambda i: i[:2] == item[1:], center_matches)
 
 if False:
+    # build dictionary based on center letter
+    for item in corp:
+        append_item(item)
+
     for item in corp:
         if item not in reduced_corp:
             if is_item_confident(item):
@@ -293,11 +297,18 @@ if False:
                     replace = raw_input('possible repeats found add {}? y, n: '.format(item))
                     if replace == 'y':
                         reduced_corp.append(item)
+else:
+    reduced_corp = [['g', 'o', 'l'], ['c', 'k', ['b', 'e', 'r']], ['k', 'o', ['v', 'w']], ['m', 'g', 'r'], ['l', 'k', ['e', 'b']], ['f', 'o', 'r'], ['k', 'e', 's'], [['h', 'm', 'n', 'i'], 'g', 'g'], ['s', 't', ['h', 'b', 'e', 'r']], ['u', 'a', ['n', 'm']], ['f', 'r', 'n'], ['e', 'c', 'k'], ['u', 'e', 'z'], ['l', 'd', ['d', 'i', 'r', 'm', 'n']], ['h', 'a', 'm'], ['u', 'a', 'c'], ['l', 'w', 'a'], ['a', 'r', 'r'], ['g', 'r', 's'], ['b', 'o', 'k'], ['r', 'd', 'r'], ['l', 'l', ['e', 'f', 'p', 'r']], ['e', 'l', 'l'], ['e', 's', 'd'], ['l', 'o', 'u'], ['e', 'l', 'o'], ['e', 'o', 'u'], ['p', 'o', 'l'], ['c', 'a', 'r'], ['r', 'l', 'l'], ['n', 'e', 'l'], ['e', 'f', ['o', 'q', 'c']], ['k', 'e', ['o', 'c', 'q']], ['a', 'm', 'g'], ['b', 'e', 'o'], ['a', 'e', ['h', 'p', 'r']], ['l', 'k', ['h', 'b', 'r']], ['r', 'r', 'l'], ['g', 'f', 'l'], [['i', 'm', 'h'], 'n', 'g'], ['o', 'l', 'd'], ['t', 'e', 'r'], ['k', 'e', 't'], ['e', 'r', 'd'], ['r', 's', 'h'], ['o', 'l', 'k'], ['e', 'n', ['p', 'f']], ['g', 'r', 'o'], ['n', 'b', 'o'], ['o', 'l', 'w'], ['r', 's', 't'], ['k', 'e', 'i'], ['k', 'e', 'o'], ['z', 'e', 'n'], ['l', 'e', 'y'], ['y', 'h', ['h', 'b', 'e']], ['o', 'v', 'm'], ['h', 'e', 'l'], ['n', 'g', 'r'], ['s', 'h', 'a'], ['f', 'l', 'e'], ['i', 'e', 'r'], ['m', 'a', 'q'], ['l', 'e', 'i'], ['r', 'n', 'z'], ['q', 'w', ['b', 'h', 'e']], ['g', 'g', 'o'], ['l', 'c', 'a'], ['t', 'o', 'i'], ['r', 'o', 'i'], ['d', 'i', 'g'], ['o', 'r', 's'], ['u', 'a', 'm'], ['l', 'p', 'o'], ['o', 'u', 'a'], ['a', 'q', 'u'], ['z', 'm', 'a'], ['o', 'k', 'o'], ['r', 'e', 'r'], ['r', 'e', 'i'], ['t', 'e', 'h'], ['a', 'n', 'e'], ['a', 'l', 'p'], ['l', 'i', 'n'], ['d', 'i', 'o'], ['u', 'a', 'o'], ['c', 'k', 'h'], ['o', 'l', 'i'], ['a', 'c', 'k'], ['l', 'l', 'c'], ['i', 'c', 'k'], ['n', 'z', 'e'], ['b', 'e', 'c'], ['e', 'i', 'n'], ['w', 'a', 'i'], ['e', 'i', 'e'], ['e', 'f', 'o'], ['e', 'i', 't'], ['r', 'o', 'l'], ['q', 'u', ['h', 'e']], ['d', 'r', 'e'], ['e', 't', 'h'], ['l', 'l', 'o'], ['n', 'g', 'p'], ['c', 'k', 'e'], ['p', 'o', 'i'], ['l', 'l', 'e'], ['i', 'n', 'g']]
 
-reduced_corp = [['g', 'o', 'l'], ['c', 'k', ['b', 'e', 'r']], ['k', 'o', ['v', 'w']], ['m', 'g', 'r'], ['l', 'k', ['e', 'b']], ['f', 'o', 'r'], ['k', 'e', 's'], [['h', 'm', 'n', 'i'], 'g', 'g'], ['s', 't', ['h', 'b', 'e', 'r']], ['u', 'a', ['n', 'm']], ['f', 'r', 'n'], ['e', 'c', 'k'], ['u', 'e', 'z'], ['l', 'd', ['d', 'i', 'r', 'm', 'n']], ['h', 'a', 'm'], ['u', 'a', 'c'], ['l', 'w', 'a'], ['a', 'r', 'r'], ['g', 'r', 's'], ['b', 'o', 'k'], ['r', 'd', 'r'], ['l', 'l', ['e', 'f', 'p', 'r']], ['e', 'l', 'l'], ['e', 's', 'd'], ['l', 'o', 'u'], ['e', 'l', 'o'], ['e', 'o', 'u'], ['p', 'o', 'l'], ['c', 'a', 'r'], ['r', 'l', 'l'], ['n', 'e', 'l'], ['e', 'f', ['o', 'q', 'c']], ['k', 'e', ['o', 'c', 'q']], ['a', 'm', 'g'], ['b', 'e', 'o'], ['a', 'e', ['h', 'p', 'r']], ['l', 'k', ['h', 'b', 'r']], ['r', 'r', 'l'], ['g', 'f', 'l'], [['i', 'm', 'h'], 'n', 'g'], ['o', 'l', 'd'], ['t', 'e', 'r'], ['k', 'e', 't'], ['e', 'r', 'd'], ['r', 's', 'h'], ['o', 'l', 'k'], ['e', 'n', ['p', 'f']], ['g', 'r', 'o'], ['n', 'b', 'o'], ['o', 'l', 'w'], ['r', 's', 't'], ['k', 'e', 'i'], ['k', 'e', 'o'], ['z', 'e', 'n'], ['l', 'e', 'y'], ['y', 'h', ['h', 'b', 'e']], ['o', 'v', 'm'], ['h', 'e', 'l'], ['n', 'g', 'r'], ['s', 'h', 'a'], ['f', 'l', 'e'], ['i', 'e', 'r'], ['m', 'a', 'q'], ['l', 'e', 'i'], ['r', 'n', 'z'], ['q', 'w', ['b', 'h', 'e']], ['g', 'g', 'o'], ['l', 'c', 'a'], ['t', 'o', 'i'], ['r', 'o', 'i'], ['d', 'i', 'g'], ['o', 'r', 's'], ['u', 'a', 'm'], ['l', 'p', 'o'], ['o', 'u', 'a'], ['a', 'q', 'u'], ['z', 'm', 'a'], ['o', 'k', 'o'], ['r', 'e', 'r'], ['r', 'e', 'i'], ['t', 'e', 'h'], ['a', 'n', 'e'], ['a', 'l', 'p'], ['l', 'i', 'n'], ['d', 'i', 'o'], ['u', 'a', 'o'], ['c', 'k', 'h'], ['o', 'l', 'i'], ['a', 'c', 'k'], ['l', 'l', 'c'], ['i', 'c', 'k'], ['n', 'z', 'e'], ['b', 'e', 'c'], ['e', 'i', 'n'], ['w', 'a', 'i'], ['e', 'i', 'e'], ['e', 'f', 'o'], ['e', 'i', 't'], ['r', 'o', 'l'], ['q', 'u', ['h', 'e']], ['d', 'r', 'e'], ['e', 't', 'h'], ['l', 'l', 'o'], ['n', 'g', 'p'], ['c', 'k', 'e'], ['p', 'o', 'i'], ['l', 'l', 'e'], ['i', 'n', 'g']]
+# re-based on reduced corp
 trips = {}
-
+mids = {}
+# build dictionary based on center letter
 # build set of bottle objects with a next and previous and a used flag
 for item in reduced_corp:
+    append_item(item)
     trips[str(item)] = {'set': item, 'used': False, 'previous': None, 'Next': None}
-    
+
+i1 = reduced_corp[0]
+center_matches = mids[i1[2]]
+print fuzzle_next(i1, center_matches)
